@@ -1,28 +1,36 @@
-const mongoose = require("mongoose");
+
 const express = require("express");
+const mongoose = require("mongoose");
+const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
-
-const app = express();
-require("dotenv").config();
+const data = require("./dbcon/connection");
 
 
 
-app.use(bodyParser.json());
-app.use(cors);
 
-mongoose.connect(URL,{
-    useCreateIndex:true,
-    useNewUrlParser:true,
-    useUnifiedTopologyL:true,
-    useFindAndModify:false
 
-})
+
+
+
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(cors());
+
+// mongoose.connect("mongodb+srv://root:root@cluster0.fucgx.mongodb.net/1bt_db?retryWrites=true&w=majority",{
+//     useNewUrlParser:true,useCreateIndex:true
+
+// });
+
+mongoose.connect("mongodb+srv://root:root@cluster0.fucgx.mongodb.net/1bt_db?retryWrites=true&w=majority",
+    err => {
+        if(err) throw err;
+        console.log('connected to MongoDB')
+    });
 
 const connection = mongoose.connection;
 
-connection.once("open",() => {
+connection.once('open',() => {
             
        console.log("mongo db connection success");
 });
@@ -34,9 +42,16 @@ app.use("/user",userRoute);
 
 
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT,() => {
+
+app.listen(3000,(err) => {
     console.log("SERVER IS RUNNNING ON ${PORT}");
+    if(err){
+        console.log(err);
+    }
+    else{
+        console.log(`Connected to port ${data.port}`)
+    }
 })
+
 
 
