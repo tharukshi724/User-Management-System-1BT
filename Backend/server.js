@@ -13,8 +13,8 @@ const data = require("./dbcon/connection");
 
 
 
-
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 app.use(cors());
 
 // mongoose.connect("mongodb+srv://root:root@cluster0.fucgx.mongodb.net/1bt_db?retryWrites=true&w=majority",{
@@ -44,7 +44,7 @@ app.use("/user",userRoute);
 
 
 app.listen(3000,(err) => {
-    console.log("SERVER IS RUNNNING ON ${PORT}");
+    
     if(err){
         console.log(err);
     }
