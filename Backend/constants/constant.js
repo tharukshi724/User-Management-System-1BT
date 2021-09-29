@@ -1,0 +1,1 @@
+export const EMAIL_SUBJECT = "reset your password"

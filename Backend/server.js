@@ -27,6 +27,7 @@ mongoose.connect("mongodb+srv://root:root@cluster0.fucgx.mongodb.net/1bt_db?retr
         if(err) throw err;
         console.log('connected to MongoDB')
     });
+    
 
 const connection = mongoose.connection;
 
